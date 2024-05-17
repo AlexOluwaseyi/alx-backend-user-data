@@ -76,7 +76,7 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     username = os.getenv('PERSONAL_DATA_DB_USERNAME', 'root')
     password = os.getenv('PERSONAL_DATA_DB_PASSWORD', '')
     host = os.getenv('PERSONAL_DATA_DB_HOST', 'localhost')
-    database = os.getenv('PERSONAL_DATA_DB_NAME')
+    database = os.getenv('PERSONAL_DATA_DB_NAME', "")
 
     connection = mysql.connector.connect(
             host=host,
@@ -84,5 +84,34 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
             password=password,
             database=database
         )
+    if connection.is_connected():
+        return connection   
+    return None
+
+
+def read_users_table(connection):
+    """
+    Read the users table from the database.
+    """
+    try:
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM users")
+        rows = cursor.fetchall()
+        for row in rows:
+            print(row)
+    except Error as e:
+        print(f"Error reading from the database: {e}")
+    finally:
+        cursor.close()
+
+
+def main():
+    """Main function"""
+    connection = get_db()
     if connection:
-        return connection
+        read_users_table(connection)
+        connection.close()
+
+
+if __name__ == "__main__":
+    main()
