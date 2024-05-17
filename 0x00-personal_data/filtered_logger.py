@@ -22,6 +22,6 @@ def filter_datum(fields: list, redaction: str,
                  message: list, separator: str) -> str:
     """Function that redacts or obfuscate PII"""
     for field in fields:
-        redacted = re.sub(rf"(\b{re.escape(field)}=)[^;]+",
-                          rf"\1{redaction}", message)
+        patt = rf"(\b{re.escape(field)}=)[^;]+"
+        redacted = re.sub(patt, rf"\1{redaction}", message)
     return redacted
