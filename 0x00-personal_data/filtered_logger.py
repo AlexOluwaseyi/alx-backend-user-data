@@ -84,9 +84,7 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
             password=password,
             database=database
         )
-    if connection.is_connected():
-        return connection   
-    return None
+    return connection
 
 
 def read_users_table(connection):
