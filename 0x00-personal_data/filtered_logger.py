@@ -93,16 +93,12 @@ def read_users_table(connection):
     """
     Read the users table from the database.
     """
-    try:
-        cursor = connection.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM users")
-        rows = cursor.fetchall()
-        for row in rows:
-            print(row)
-    except Error as e:
-        print(f"Error reading from the database: {e}")
-    finally:
-        cursor.close()
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM users")
+    rows = cursor.fetchall()
+    for row in rows:
+        print(row)
+    cursor.close()
 
 
 def main():

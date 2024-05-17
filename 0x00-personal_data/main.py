@@ -1,10 +1,12 @@
-#!/
-get_db = __import__('filtered_logger').get_db
+#!/usr/bin/env python3
+"""
+Main file
+"""
 
-db = get_db()
-cursor = db.cursor()
-cursor.execute("SELECT COUNT(*) FROM users;")
-for row in cursor:
-    print(row[0])
-cursor.close()
-db.close()
+hash_password = __import__('encrypt_password').hash_password
+is_valid = __import__('encrypt_password').is_valid
+
+password = "MyAmazingPassw0rd"
+encrypted_password = hash_password(password)
+print(encrypted_password)
+print(is_valid(encrypted_password, password))
