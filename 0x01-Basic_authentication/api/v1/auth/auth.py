@@ -5,6 +5,7 @@
 
 from flask import request
 from typing import List, TypeVar
+from models.user import User
 
 
 class Auth:
@@ -43,6 +44,10 @@ class Auth:
         """Function definition to check
         authorization header from HTTP requests
         """
+        if request is None:
+            return None
+        if request.authorization:
+            return request.authorization
         return None
 
     def current_user(self, request=None) -> TypeVar('User'):
