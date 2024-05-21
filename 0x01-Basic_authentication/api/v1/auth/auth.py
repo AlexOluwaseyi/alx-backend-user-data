@@ -25,11 +25,10 @@ class Auth:
             if text_str[-1] == "/":
                 return text_str[:-1]
             return text_str
-        
+
         if path is None:
             return True
         if excluded_paths is None or len(excluded_paths) == 0:
-            print('empty list')
             return True
         if path in excluded_paths:
             return False
