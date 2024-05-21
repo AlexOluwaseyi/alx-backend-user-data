@@ -20,6 +20,8 @@ class Auth:
         is required to access path/route
         """
         def strip(text_str: str) -> str:
+            """Remove trailing "/" from text
+            """
             if text_str[-1] == "/":
                 return text_str[:-1]
             return text_str
