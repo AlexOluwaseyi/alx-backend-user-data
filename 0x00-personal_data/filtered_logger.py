@@ -87,7 +87,7 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     return connection
 
 
-def read_users_table(connection):
+def read_users_table(connection) -> None:
     """
     Read the users table from the database.
     """
@@ -99,7 +99,7 @@ def read_users_table(connection):
     cursor.close()
 
 
-def main():
+def main() -> None:
     """Main function"""
     connection = get_db()
     if connection:
