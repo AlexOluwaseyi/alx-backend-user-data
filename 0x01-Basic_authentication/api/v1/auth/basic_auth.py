@@ -7,7 +7,7 @@ from api.v1.auth.auth import Auth
 
 
 class BasicAuth(Auth):
-    """Basic authentication 
+    """Basic authentication
     Inherits from Auth
     """
     pass
