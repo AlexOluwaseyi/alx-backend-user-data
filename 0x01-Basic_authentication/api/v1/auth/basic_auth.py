@@ -4,6 +4,7 @@
 """
 
 from api.v1.auth.auth import Auth
+from models.user import User
 import base64
 import binascii
 
@@ -52,5 +53,19 @@ class BasicAuth(Auth):
             return None, None
         if ":" not in decoded_base64_authorization_header:
             return None, None
-        user_email, password = decoded_base64_authorization_header.split(":")
-        return user_email, password
+        user_email, user_pwd = decoded_base64_authorization_header.split(":")
+        return user_email, user_pwd
+
+    def user_object_from_credentials(self, user_email: str,
+                                     user_pwd: str) -> TypeVar('User'):
+        """Returns the User instance based on
+        email and password"""
+        if user_email is None or not isinstance(user_email, str):
+            return None
+        if user_pwd is None or not isinstance(user_pwd, str):
+            return None
+        if not User.search(user_email):
+            return None
+        if not User.is_valid_password(user_pwd):
+            return None
+        return User(user_email, user_pwd)
