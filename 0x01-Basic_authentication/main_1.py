@@ -1,6 +1,6 @@
 """ Main 1
 """
-from auth import Auth
+from api.v1.auth.auth import Auth
 
 a = Auth()
 
