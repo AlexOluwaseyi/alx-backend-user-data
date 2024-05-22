@@ -67,8 +67,11 @@ class BasicAuth(Auth):
             return None
 
         # Search for user by email
-        user_list = User.search({'email': user_email})
-        if not user_list or len(user_list) == 0:
+        try:
+            user_list = User.search({'email': user_email})
+            if not user_list or len(user_list) == 0:
+                return None
+        except KeyError:
             return None
 
         # Check the password
