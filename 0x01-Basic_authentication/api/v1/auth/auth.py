@@ -34,9 +34,12 @@ class Auth:
         if path in excluded_paths:
             return False
         stripped_excluded_path = []
-        for i in excluded_paths:
-            stripped_excluded_path.append(strip(i))
-            if strip(path) in stripped_excluded_path:
+        for pattern in excluded_paths:
+            stripped_excluded_path.append(strip(pattern))
+            if pattern.endswith("*"):
+                if strip(path).startswith(strip(pattern[:-1])):
+                    return False
+            elif strip(path) in stripped_excluded_path:
                 return False
         return True
 
