@@ -50,7 +50,7 @@ class Auth:
         """
         if request is None:
             return None
-        print(request.cookies.keys())
+        # print(request.cookies.keys())
         if request.authorization:
             return request.authorization
         return None
