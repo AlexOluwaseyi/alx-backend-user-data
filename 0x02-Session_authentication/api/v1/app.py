@@ -18,7 +18,10 @@ paths = ['/api/v1/status/', '/api/v1/unauthorized/',
 
 auth_type = os.getenv('AUTH_TYPE')
 
-if auth_type == "session_auth":
+if auth_type == "session_exp_auth":
+    from api.v1.auth.session_exp_auth import SessionExpAuth
+    auth = SessionExpAuth()
+elif auth_type == "session_auth":
     from api.v1.auth.session_auth import SessionAuth
     auth = SessionAuth()
 elif auth_type == "basic_auth":
