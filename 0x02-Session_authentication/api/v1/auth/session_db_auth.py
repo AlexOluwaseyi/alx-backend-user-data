@@ -12,16 +12,10 @@ class SessionDBAuth(SessionExpAuth):
     Inherits from SessionExpAuth"""
     def create_session(self, user_id=None):
         """Overloads create_session"""
-        print(f'creating session in sesDBauth wit uid- {user_id}')
         user_session = UserSession()
         session_id = super().create_session(user_id)
         if not session_id:
             return None
-        # session_dictionary = {}
-        # session_dictionary['user_id'] = user_id
-        # session_dictionary['created_at'] = datetime.now()
-        # self.user_id_by_session_id[session_id] = session_dictionary
-        print(f'session id = {session_id}')
         return session_id
 
     def user_id_for_session_id(self, session_id=None):
