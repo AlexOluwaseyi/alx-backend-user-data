@@ -50,9 +50,8 @@ class Auth:
         """
         if request is None:
             return None
-        # print(request.cookies.keys())
         if request.authorization:
-            return request.authorization
+            return request.headers.get('Authorization')
         return None
 
     def current_user(self, request=None) -> TypeVar('User'):
