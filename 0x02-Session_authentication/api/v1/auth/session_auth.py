@@ -36,9 +36,9 @@ class SessionAuth(Auth):
         """Overloads and returns a User instance
         based on a cookie value
         """
-        session_name = self.session_cookie(request)
-        session_id = self.user_id_for_session_id(session_name)
-        user = User.get(session_id)
+        session_id = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(session_id)
+        user = User.get(user_id)
         return user
     
     def destroy_session(self, request=None):
@@ -46,12 +46,20 @@ class SessionAuth(Auth):
         """
         if request is None:
             return False
-        if not self.session_cookie(request):
-            return False
+        # if self.session_cookie(request) is None:
+            # return False
+        '''
         session_name = self.session_cookie(request)
         if not self.user_id_for_session_id(session_name):
             return False
         session_id = self.user_id_for_session_id(session_name)
         # print(type(session_id))
         del self.user_id_by_session_id.get[session_id]
+        return True'''
+        session_id = self.session_cookie(request)
+        if session_id is None:
+            return False
+        if self.user_id_for_session_id(session_id) is None:
+            return False
+        del self.user_id_by_session_id[session_id]
         return True
