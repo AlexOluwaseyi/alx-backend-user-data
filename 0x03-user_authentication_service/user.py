@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+"""
+User model module
+"""
+
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, Integer, String
 
