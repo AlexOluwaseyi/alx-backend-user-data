@@ -43,4 +43,4 @@ class DB:
         except Exception as e:
             self._session.rollback()
             raise
-        return new_user
+        # return new_user
