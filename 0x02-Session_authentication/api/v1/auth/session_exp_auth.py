@@ -16,7 +16,7 @@ class SessionExpAuth(SessionAuth):
         """Initializer"""
         super().__init__()
         self.session_duration = int(os.getenv('SESSION_DURATION', 0))
-        
+
     def create_session(self, user_id=None):
         """Overloads create session"""
         session_id = super().create_session(user_id)
