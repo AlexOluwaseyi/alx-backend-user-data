@@ -18,11 +18,15 @@ class User(Base):
     """
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
-    email = Column(String(256), nullable=False)
-    hashed_password = Column(String(256), nullable=False)
-    session_id = Column(String(256), nullable=True)
-    reset_token = Column(String(256), nullable=True)
+    email = Column(String(250), nullable=False)
+    hashed_password = Column(String(250), nullable=False)
+    session_id = Column(String(250), nullable=True)
+    reset_token = Column(String(250), nullable=True)
 
-    # def __init__(self, *args: list, **kwargs: dict):
-    #     self.email = kwargs.get('email')
-    #     self.hashed_password = kwargs.get('hashed_password')
+    def __init__(self, *args: list, **kwargs: dict):
+        """Initializer
+        """
+        self.email = kwargs.get('email')
+        self.hashed_password = kwargs.get('hashed_password')
+        self.session_id = kwargs.get('session_id')
+        self.reset_token = kwargs.get('reset_token')
