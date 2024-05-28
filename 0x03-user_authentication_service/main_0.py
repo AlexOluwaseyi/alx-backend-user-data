@@ -31,10 +31,6 @@ my_db = DB()
 
 user_1 = my_db.add_user("test2@test.com", "SuperHashedPwd2")
 print(user_1.id)
-print(user_1.email)
-print(user_1.hashed_password)
 
 user_2 = my_db.add_user("test1@test.com", "SuperHashedPwd1")
 print(user_2.id)
-print(user_2.email)
-print(user_2.hashed_password)
