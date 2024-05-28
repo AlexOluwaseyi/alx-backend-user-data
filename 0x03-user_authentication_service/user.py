@@ -4,7 +4,7 @@
 User model module
 """
 
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
 
 Base = declarative_base()
@@ -26,11 +26,3 @@ class User(Base):
     hashed_password = Column(String(250), nullable=False)
     session_id = Column(String(250), nullable=True)
     reset_token = Column(String(250), nullable=True)
-
-    def __init__(self, *args: list, **kwargs: dict):
-        """Initializer
-        """
-        self.email = kwargs.get('email')
-        self.hashed_password = kwargs.get('hashed_password')
-        self.session_id = kwargs.get('session_id')
-        self.reset_token = kwargs.get('reset_token')
