@@ -7,7 +7,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.exc import InvalidRequestError 
+from sqlalchemy.exc import InvalidRequestError
 
 from user import Base, User
 
@@ -52,14 +52,14 @@ class DB:
         for key, value in kwargs.items():
             if key not in User.__table__.columns:
                 raise InvalidRequestError
-        # try:
-        #     user = self._session.query(User).filter_by(**kwargs).first()
-        #     if user is None:
-        #         raise NoResultFound
-        #     return user
-        # except NoResultFound:
-        #     raise NoResultFound
-        user = self._session.query(User).filter_by(**kwargs).first()
-        if user is None:
+        try:
+            user = self._session.query(User).filter_by(**kwargs).first()
+            if user is None:
+                raise NoResultFound
+            return user
+        except NoResultFound:
             raise NoResultFound
-        return user
+        # user = self._session.query(User).filter_by(**kwargs).first()
+        # if user is None:
+        #     raise NoResultFound
+        # return user
