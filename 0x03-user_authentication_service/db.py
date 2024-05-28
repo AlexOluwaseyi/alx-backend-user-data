@@ -49,7 +49,7 @@ class DB:
         as filtered by the method's input arguments. No
         validation of input arguments required at this point.
         """
-        for key, value in kwargs.items():
+        for key in kwargs.keys():
             if key not in User.__table__.columns:
                 raise InvalidRequestError
         try:
@@ -59,7 +59,18 @@ class DB:
             return user
         except NoResultFound:
             raise NoResultFound
-        # user = self._session.query(User).filter_by(**kwargs).first()
-        # if user is None:
-        #     raise NoResultFound
-        # return user
+
+    def update_user(self, user_id: int, **kwargs: dict) -> None:
+        """DB.update_user method that takes as
+        argument a required user_id integer and
+        arbitrary keyword arguments, and returns None.
+        """
+        user = self.find_user_by()
+        if user is None:
+            return
+        for key in kwargs.keys():
+            if key not in User.__table__.columns:
+                raise ValueError
+        self._session.query(User).update(kwargs)
+        self._session.commit()
+        return None
