@@ -31,8 +31,7 @@ class DB:
             self.__session = DBSession()
         return self.__session
 
-    def add_user(self, email: str,
-                 hashed_password: str):
+    def add_user(self, email: str, hashed_password: str):
         """
         Add a new user to DB
         """
@@ -42,5 +41,4 @@ class DB:
             self._session.commit()
         except Exception as e:
             self._session.rollback()
-            raise
-        # return new_user
+        return new_user
