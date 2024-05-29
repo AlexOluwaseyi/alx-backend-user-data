@@ -55,12 +55,6 @@ class Auth:
         except InvalidRequestError:
             return False
 
-    def _generate_uuid():
-        """Generate uuid
-        and return str version"""
-        uuid_str = str(uuid.uuid4())
-        return uuid_str
-
 
 def _hash_password(password: str) -> bytes:
     """method that takes in a password string
@@ -68,3 +62,9 @@ def _hash_password(password: str) -> bytes:
     """
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), gensalt())
     return hashed_password
+
+
+def _generate_uuid():
+    """Generate uuid
+    and return str version"""
+    return str(uuid.uuid4())

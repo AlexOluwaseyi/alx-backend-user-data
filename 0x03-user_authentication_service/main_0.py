@@ -145,7 +145,7 @@ print(auth.valid_login("unknown@email", password))
 
 print("------")
 
-from auth import Auth
+import auth
 
-uid = Auth._generate_uuid()
+uid = auth._generate_uuid()
 print(uid)
