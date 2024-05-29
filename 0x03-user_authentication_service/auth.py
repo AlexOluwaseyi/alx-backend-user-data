@@ -55,7 +55,7 @@ class Auth:
         except InvalidRequestError:
             return False
 
-    def _generate_uuid() -> str:
+    def _generate_uuid():
         """Generate uuid
         and return str version"""
         uuid_str = str(uuid.uuid4())
