@@ -74,4 +74,4 @@ class DB:
                     raise ValueError
             self._session.query(User).update(kwargs)
             self._session.commit()
-        return None
+            return None
