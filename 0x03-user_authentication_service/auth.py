@@ -89,6 +89,21 @@ class Auth:
         except InvalidRequestError:
             return None
 
+    def destroy_session(self, user_id):
+        """takes a single user_id integer
+        argument and returns None.
+
+        The method updates the corresponding
+        user's session ID to None."""
+        try:
+            user = self._db.find_user_by(user_id=user_id)
+            if user:
+                return None
+        except NoResultFound:
+            return None
+        except InvalidRequestError:
+            return None
+
 
 def _hash_password(password: str) -> bytes:
     """method that takes in a password string
