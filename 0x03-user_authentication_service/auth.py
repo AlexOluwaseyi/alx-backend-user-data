@@ -103,6 +103,7 @@ class Auth:
             return None
         except InvalidRequestError:
             return None
+        return None
 
 
 def _hash_password(password: str) -> bytes:
