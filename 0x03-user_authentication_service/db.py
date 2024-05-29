@@ -42,7 +42,7 @@ class DB:
         self._session.commit()
         return new_user
 
-    def find_user_by(self, **kwargs):
+    def find_user_by(self, **kwargs) -> User:
         """
         This method takes in arbitrary keyword arguments
         and returns the first row found in the users table
@@ -59,10 +59,8 @@ class DB:
             return user
         except NoResultFound:
             raise NoResultFound
-        # user = self._session.query(User).filter_by(**kwargs).first()
-        # if user is None:
-        #     raise NoResultFound
-        return user
+        except InvalidRequestError:
+            raise InvalidRequestError
 
     def update_user(self, user_id: int, **kwargs: dict) -> None:
         """DB.update_user method that takes as

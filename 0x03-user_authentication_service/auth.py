@@ -7,9 +7,9 @@ User authentication module
 import bcrypt
 from bcrypt import gensalt
 from db import DB
-from typing import TypeVar
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError
 import uuid
 
 
@@ -22,7 +22,7 @@ class Auth:
         """
         self._db = DB()
 
-    def register_user(self, email: str, password: str) -> TypeVar('User'):
+    def register_user(self, email: str, password: str) -> User:
         """take mandatory email and password string
         arguments and return a User object.
         """
@@ -51,6 +51,8 @@ class Auth:
                                       user.hashed_password)
             return False
         except NoResultFound:
+            return False
+        except InvalidRequestError:
             return False
 
     def _generate_uuid() -> str:
