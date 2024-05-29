@@ -62,17 +62,16 @@ class DB:
         except InvalidRequestError:
             raise InvalidRequestError
 
-    def update_user(self, user_id: int, **kwargs: dict) -> None:
+    def update_user(self, user_id, **kwargs):
         """DB.update_user method that takes as
         argument a required user_id integer and
         arbitrary keyword arguments, and returns None.
         """
         user = self.find_user_by()
-        if user is None:
-            return
-        for key in kwargs.keys():
-            if key not in User.__table__.columns:
-                raise ValueError
-        self._session.query(User).update(kwargs)
-        self._session.commit()
+        if user is not None:
+            for key in kwargs.keys():
+                if key not in User.__table__.columns:
+                    raise ValueError
+            self._session.query(User).update(kwargs)
+            self._session.commit()
         return None
