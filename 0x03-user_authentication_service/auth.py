@@ -56,8 +56,8 @@ class Auth:
             return False
 
     def create_session(self, email):
-        """takes an email string argument and
-        returns the session ID as a string.
+        """ It takes an email string argument
+        and returns the session ID as a string.
 
         The method should find the user corresponding
         to the email, generate a new UUID and store it
@@ -69,10 +69,24 @@ class Auth:
                 user.session_id = _generate_uuid()
                 return user.session_id
         except NoResultFound:
-            print('noresulfound')
             return None
         except InvalidRequestError:
-            print('invalidrequest')
+            return None
+
+    def get_user_from_session_id(self, session_id: str):
+        """It takes a single session_id string argument
+        and returns the corresponding User or None.
+
+        If the session ID is None or no user is found,
+        return None. Otherwise return the corresponding
+        user."""
+        try:
+            user = self._db.find_user_by(session_id=session_id)
+            if user:
+                return user
+        except NoResultFound:
+            return None
+        except InvalidRequestError:
             return None
 
 
