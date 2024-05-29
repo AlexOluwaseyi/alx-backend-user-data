@@ -119,14 +119,13 @@ class Auth:
             if not user:
                 raise ValueError
             user.reset_token = _generate_uuid()
-            self._db.update_user(user)
             return user.reset_token
         except NoResultFound:
-            return None
+            raise
         except InvalidRequestError:
-            return None
+            raise
         except Exception as e:
-            return None
+            raise
 
 
 def _hash_password(password: str) -> bytes:
