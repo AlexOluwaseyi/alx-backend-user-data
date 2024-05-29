@@ -4,7 +4,7 @@
 Basic Flask App
 """
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, abort, make_response
 from auth import Auth
 
 app = Flask(__name__)
@@ -31,5 +31,24 @@ def reg_user():
     return ('not a valid user')
 
 
+@app.route("/sessions", methods=['POST'], strict_slashes=False)
+def login():
+    """Login a User"""
+    email = request.form.get('email')
+    password = request.form.get('password')
+    if email is not None and password is not None:
+        try:
+            user_login = AUTH.valid_login(email, password)
+            if user_login:
+                session_id = AUTH.create_session(email)
+                response = make_response(jsonify({"email": email,
+                                                  "message": "logged in"}))
+                response.set_cookie('session_id', session_id)
+                return response
+        except Exception as e:
+            abort(401)
+    abort(401)
+
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5000")
+    app.run(host="0.0.0.0", port="5000", debug=True)

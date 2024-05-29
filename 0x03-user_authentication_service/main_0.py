@@ -165,3 +165,6 @@ auth.register_user(email, password)
 
 print(auth.create_session(email))
 print(auth.create_session("unknown@email.com"))
+
+
+print("------")
