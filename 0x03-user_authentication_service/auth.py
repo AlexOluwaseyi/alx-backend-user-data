@@ -105,7 +105,7 @@ class Auth:
             return None
         return None
 
-    def get_reset_password_token(self, email):
+    def get_reset_password_token(self, email: str) -> str:
         """It take an email string argument
         and returns a string.
 
