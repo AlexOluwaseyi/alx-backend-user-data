@@ -121,9 +121,9 @@ class Auth:
             user.reset_token = _generate_uuid()
             return user.reset_token
         except NoResultFound:
-            raise ValueError
+            return
         except InvalidRequestError:
-            raise ValueError
+            return
 
 
 def _hash_password(password: str) -> bytes:
