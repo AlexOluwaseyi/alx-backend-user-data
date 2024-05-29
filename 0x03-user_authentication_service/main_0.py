@@ -53,6 +53,7 @@ print(find_user.id)
 
 try:
     find_user = my_db.find_user_by(email="test2@test.com")
+    print(find_user)
     print(find_user.id)
 except NoResultFound:
     print("Not found")
@@ -97,3 +98,27 @@ Main file
 from auth import _hash_password
 
 print(_hash_password("Hello Holberton"))
+
+print("------")
+
+"""
+Main file
+"""
+from auth import Auth
+
+email = 'me@me.com'
+password = 'mySecuredPwd'
+
+auth = Auth()
+
+try:
+    user = auth.register_user(email, password)
+    print("successfully created a new user!")
+except ValueError as err:
+    print("could not create a new user: {}".format(err))
+
+try:
+    user = auth.register_user(email, password)
+    print("successfully created a new user!")
+except ValueError as err:
+    print("could not create a new user: {}".format(err)) 
