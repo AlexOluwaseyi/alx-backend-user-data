@@ -10,7 +10,7 @@ from db import DB
 from typing import TypeVar
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
-import pytest
+from uuid import uuid4
 
 
 class Auth:
@@ -52,6 +52,11 @@ class Auth:
             return False
         except NoResultFound:
             return False
+    
+    def _generate_uuid() -> str:
+        """Generate uuid
+        and return str version"""
+        return str(uuid4())
 
 
 def _hash_password(password: str) -> bytes:
