@@ -55,6 +55,26 @@ class Auth:
         except InvalidRequestError:
             return False
 
+    def create_session(self, email):
+        """takes an email string argument and
+        returns the session ID as a string.
+
+        The method should find the user corresponding
+        to the email, generate a new UUID and store it
+        in the database as the user's session_id, then
+        return the session ID."""
+        try:
+            user = self._db.find_user_by(email=email)
+            if user:
+                user.session_id = _generate_uuid()
+                return user.session_id
+        except NoResultFound:
+            print('noresulfound')
+            return None
+        except InvalidRequestError:
+            print('invalidrequest')
+            return None
+
 
 def _hash_password(password: str) -> bytes:
     """method that takes in a password string
