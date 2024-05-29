@@ -114,16 +114,21 @@ class Auth:
         ValueError exception. If it exists,
         generate a UUID and update the user's
         reset_token database field. Return the token."""
-        try:
-            user = self._db.find_user_by(email=email)
-            if not user:
-                raise ValueError
-            user.reset_token = _generate_uuid()
-            return user.reset_token
-        except NoResultFound:
-            return None
-        except InvalidRequestError:
-            return None
+        # try:
+        #     user = self._db.find_user_by(email=email)
+        #     if not user:
+        #         raise ValueError
+        #     user.reset_token = _generate_uuid()
+        #     return user.reset_token
+        # except NoResultFound:
+        #     return None
+        # except InvalidRequestError:
+        #     return None
+        user = self._db.find_user_by(email=email)
+        if not user:
+            raise ValueError
+        user.reset_token = _generate_uuid()
+        return user.reset_token
 
 
 def _hash_password(password: str) -> bytes:
