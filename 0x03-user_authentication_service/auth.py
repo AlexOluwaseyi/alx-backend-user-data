@@ -122,11 +122,11 @@ class Auth:
             self._db.update_user(user)
             return user.reset_token
         except NoResultFound:
-            raise
+            return None
         except InvalidRequestError:
-            raise
-        except Exception:
-            raise
+            return None
+        except Exception as e:
+            return None
 
 
 def _hash_password(password: str) -> bytes:
