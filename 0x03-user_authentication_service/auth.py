@@ -89,7 +89,7 @@ class Auth:
         except InvalidRequestError:
             return None
 
-    def destroy_session(self, user_id):
+    def destroy_session(self, user_id: int) -> None:
         """takes a single user_id integer
         argument and returns None.
 
