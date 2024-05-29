@@ -168,6 +168,25 @@ print(uid)
 
 
 print("------")
+# """
+# Main file
+# """
+# from auth import Auth
+
+# email = 'newbob@bob.com'
+# password = 'MyPwdOfBob'
+# auth = Auth()
+
+# user = auth.register_user(email, password)
+
+# print(auth.create_session(email))
+# # column_values = {column.name: getattr(user, column.name) for column in user.__table__.columns}
+# # print(column_values)
+# print(auth.destroy_session(user.id))
+# # column_values = {column.name: getattr(user, column.name) for column in user.__table__.columns}
+# # print(column_values)
+# print("------")
+# print("------")
 """
 Main file
 """
@@ -178,11 +197,17 @@ password = 'MyPwdOfBob'
 auth = Auth()
 
 user = auth.register_user(email, password)
-
+column_values = {column.name: getattr(user, column.name) for column in user.__table__.columns}
+print(column_values)
+print("***********************************")
 print(auth.create_session(email))
-# column_values = {column.name: getattr(user, column.name) for column in user.__table__.columns}
-# print(column_values)
-print(auth.destroy_session(user.id))
-# column_values = {column.name: getattr(user, column.name) for column in user.__table__.columns}
-# print(column_values)
+column_values = {column.name: getattr(user, column.name) for column in user.__table__.columns}
+print(column_values)
+print(auth.get_reset_password_token(email))
+column_values = {column.name: getattr(user, column.name) for column in user.__table__.columns}
+print(column_values)
+print("------")
+print(auth.get_reset_password_token("no@email.com"))
+column_values = {column.name: getattr(user, column.name) for column in user.__table__.columns}
+print(column_values)
 print("------")
