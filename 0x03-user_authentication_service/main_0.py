@@ -151,20 +151,38 @@ uid = auth._generate_uuid()
 print(uid)
 
 
+# print("------")
+# """
+# Main file
+# """
+# from auth import Auth
+
+# email = 'bob@bob.com'
+# password = 'MyPwdOfBob'
+# auth = Auth()
+
+# auth.register_user(email, password)
+
+# print(auth.create_session(email))
+# print(auth.create_session("unknown@email.com"))
+
+
 print("------")
 """
 Main file
 """
 from auth import Auth
 
-email = 'bob@bob.com'
+email = 'newbob@bob.com'
 password = 'MyPwdOfBob'
 auth = Auth()
 
-auth.register_user(email, password)
+user = auth.register_user(email, password)
 
 print(auth.create_session(email))
-print(auth.create_session("unknown@email.com"))
-
-
+# column_values = {column.name: getattr(user, column.name) for column in user.__table__.columns}
+# print(column_values)
+print(auth.destroy_session(user.id))
+# column_values = {column.name: getattr(user, column.name) for column in user.__table__.columns}
+# print(column_values)
 print("------")

@@ -96,7 +96,8 @@ class Auth:
         The method updates the corresponding
         user's session ID to None."""
         try:
-            user = self._db.find_user_by(user_id=user_id)
+            print('trying')
+            user = self._db.find_user_by(id=user_id)
             if user:
                 user.session_id = None
         except NoResultFound:
