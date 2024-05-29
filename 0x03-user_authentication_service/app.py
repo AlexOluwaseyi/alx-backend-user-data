@@ -4,7 +4,7 @@
 Basic Flask App
 """
 
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, jsonify, request
 from auth import Auth
 
 app = Flask(__name__)
@@ -30,4 +30,4 @@ def reg_user():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5000", debug=True)
+    app.run(host="0.0.0.0", port="5000")
