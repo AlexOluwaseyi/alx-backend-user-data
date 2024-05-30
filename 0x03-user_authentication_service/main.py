@@ -36,7 +36,7 @@ def log_in_wrong_password(email: str, password: str) -> None:
     assert isinstance(email, str)
     assert isinstance(password, str)
     login = AUTH.valid_login(email, password)
-    assert login == False
+    assert login is False
 
 
 def log_in(email: str, password: str) -> str:
@@ -65,7 +65,7 @@ def reset_password_token(email: str) -> str:
 
 def update_password(email: str, reset_token: str, new_password: str) -> None:
     pass
-logout
+
 
 EMAIL = "guillaume@holberton.io"
 PASSWD = "b4l0u"
