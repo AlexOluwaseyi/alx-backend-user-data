@@ -66,7 +66,8 @@ class Auth:
         try:
             user = self._db.find_user_by(email=email)
             if user:
-                user.session_id = _generate_uuid()
+                session_id = _generate_uuid()
+                self._db.update_user(user, session_id=session_id)
                 return user.session_id
         except NoResultFound:
             return None
@@ -114,19 +115,45 @@ class Auth:
         ValueError exception. If it exists,
         generate a UUID and update the user's
         reset_token database field. Return the token."""
+        user = None
         try:
             user = self._db.find_user_by(email=email)
             if not user:
                 raise ValueError
             reset_token = _generate_uuid()
-            self._db.update_user(user.id, reset_token=reset_token)
-            return user.reset_token
-        except NoResultFound:
-            raise
-        except InvalidRequestError:
-            raise
+            self._db.update_user(user, reset_token=reset_token)
+            return reset_token
+        # except NoResultFound:
+        #     return None
+        # except InvalidRequestError:
+        #     return None
         except Exception as e:
-            raise
+            return None
+
+    def update_password(self, reset_token, password):
+        """ It takes reset_token string argument and
+        a password string argument and returns None.
+
+        Use the reset_token to find the corresponding user.
+        If it does not exist, raise a ValueError exception.
+
+        Otherwise, hash the password and update the user's
+        hashed_password field with the new hashed password
+        and the reset_token field to None."""
+        try:
+            user = self._db.find_user_by(reset_token=reset_token)
+            if not user:
+                raise ValueError
+            hashed_password = _hash_password(password)
+            self._db.update_user(user.id, {'password': hashed_password,
+                                           'reset_token': None})
+            return None
+        except NoResultFound:
+            raise None
+        except InvalidRequestError:
+            return None
+        except ValueError:
+            return None
 
 
 def _hash_password(password: str) -> bytes:

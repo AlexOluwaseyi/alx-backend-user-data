@@ -208,6 +208,7 @@ column_values = {column.name: getattr(user, column.name) for column in user.__ta
 print(column_values)
 print("------")
 print(auth.get_reset_password_token("no@email.com"))
+print(auth.get_reset_password_token(email))
 column_values = {column.name: getattr(user, column.name) for column in user.__table__.columns}
 print(column_values)
 print("------")
