@@ -149,7 +149,7 @@ class Auth:
                                            'reset_token': None})
             return None
         except NoResultFound:
-            raise None
+            return None
         except InvalidRequestError:
             return None
         except ValueError:
