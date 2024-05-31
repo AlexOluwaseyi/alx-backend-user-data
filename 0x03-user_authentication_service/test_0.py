@@ -11,13 +11,15 @@ reset_token = AUTH.get_reset_password_token(
     'test@test.com'
 )
 
-AUTH.update_password(
-    reset_token,
-    'test'
-)
-
-if user.reset_token is not None:
-    print("Reset token not set to none after updating password. Password update did not work correctly.")
-    exit(0)
+with app.test_client() as c:
+    payload = {
+        'email': "test@test.com",
+        'reset_token': "bad_reset_token",
+        'new_password': 'test'
+    }
+    resp = c.put('/reset_password', data=payload)
+    if resp.status_code != 403:
+        print("Status code not 403")
+        exit(0)
 
 print("OK", end='')
