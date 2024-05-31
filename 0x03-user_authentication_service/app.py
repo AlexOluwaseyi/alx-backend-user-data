@@ -6,7 +6,6 @@ Basic Flask App
 
 from flask import Flask, jsonify, request, abort, make_response, redirect
 from auth import Auth
-from sqlalchemy.exc import NoResultFound
 
 app = Flask(__name__)
 AUTH = Auth()
@@ -102,8 +101,6 @@ def update_password():
             abort(403)
         AUTH.update_password(reset_token, new_password)
         return jsonify({"email": email, "message": "Password updated"}), 200
-    except NoResultFound:
-        abort(403)
     except ValueError:
         abort(403)
 
