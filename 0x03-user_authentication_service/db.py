@@ -62,7 +62,7 @@ class DB:
         except InvalidRequestError:
             raise InvalidRequestError
 
-    def update_user(self, user_id: str, **kwargs: dict):
+    def update_user(self, user_id: int, **kwargs: dict):
         """DB.update_user method that takes as
         argument a required user_id integer and
         arbitrary keyword arguments, and returns None.
