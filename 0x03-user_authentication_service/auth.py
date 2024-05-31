@@ -123,12 +123,12 @@ class Auth:
             reset_token = _generate_uuid()
             self._db.update_user(user, reset_token=reset_token)
             return reset_token
-        # except NoResultFound:
-        #     return None
+        except NoResultFound:
+            raise ValueError
         # except InvalidRequestError:
         #     return None
         except Exception as e:
-            return None
+            raise ValueError
 
     def update_password(self, reset_token, password):
         """ It takes reset_token string argument and
