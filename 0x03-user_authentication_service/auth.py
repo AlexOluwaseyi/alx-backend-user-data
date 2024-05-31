@@ -123,10 +123,10 @@ class Auth:
             reset_token = _generate_uuid()
             self._db.update_user(user, reset_token=reset_token)
             return reset_token
-        # except NoResultFound:
-        #     return None
-        # except InvalidRequestError:
-        #     return None
+        except NoResultFound:
+            return None
+        except InvalidRequestError:
+            return None
         except Exception as e:
             return None
 
